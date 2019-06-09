@@ -1,0 +1,5 @@
+基于Netty-Socket改造
+
+
+handlerAdded和handlerRemoved
+连接加入和退出

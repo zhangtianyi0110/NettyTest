@@ -1,0 +1,50 @@
+netty实现简单SocketServer步,回传helloword步骤
+1.定义bossGroup和workerGroup（NioEventGroup()）
+2.通过便捷的启动服务类启动
+ServerBootstrap serverBootstrap = new ServerBootstrap();
+serverBootstrap.group(bossGroup, workerGroup).channel(NioServerSocketChannel.class).childHandler(new TestServerInitializer());
+//注意服务端使用childHandler方法,也可以是用handler方法,在服务端两个方法针对不同的对象，childHandler针对的是workerGroup，是对这个连接的具体消息的处理，
+而handler针对bossGroup，是对连接的分发，日志打印等
+通过initializer初始化按顺序添加handler
+3.在自定义handler中重写方法定义处理方式(事件回调方法)
+
+客户端基本流程和服务端一样
+客户端定义
+ EventLoopGroup eventLoopGroup = new NioEventLoopGroup();
+2.通过便捷的启动类启动
+Bootstrap bootstrap = new Bootstrap();
+bootstrap.group(eventLoopGroup).channel(NioSocketChannel.class).handler(new MyClientInitializer());
+
+3.编写MyClientInitializer
+ protected void initChannel(SocketChannel ch) throws Exception {
+        ChannelPipeline pipeline = ch.pipeline();
+
+        pipeline.addLast("lengthFieldBasedFrameDecoder",new LengthFieldBasedFrameDecoder(Integer.MAX_VALUE,0,4,0,4));
+        pipeline.addLast("lengthFieldPrepender",new LengthFieldPrepender(4));
+        pipeline.addLast(new StringEncoder(CharsetUtil.UTF_8));
+        pipeline.addLast(new StringDecoder(CharsetUtil.UTF_8));
+
+        pipeline.addLast(new MyClientHandler());
+
+    }
+4.编写MyClientHandler
+    @Override
+    protected void channelRead0(ChannelHandlerContext ctx, String msg) throws Exception {
+        System.out.println(ctx.channel().remoteAddress());
+        System.out.println("client output:"+ msg);
+        ctx.channel().writeAndFlush("Form Client:"+ LocalDateTime.now());
+    }
+    //触发如果没有触发，服务器和客户端连接了，不会发送数据，需要启动触发
+    @Override
+    public void channelActive(ChannelHandlerContext ctx) throws Exception {
+        ctx.writeAndFlush("客户端连接服务端了..");
+
+    }
+
+    @Override
+    public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
+        super.exceptionCaught(ctx, cause);
+        ctx.close();
+    }
+
+5.启动服务器，启动客户端

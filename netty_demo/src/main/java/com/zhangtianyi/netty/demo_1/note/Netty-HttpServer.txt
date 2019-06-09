@@ -1,0 +1,7 @@
+netty实现简单HTTPServer步,回传helloword步骤
+1.定义bossGroup和workerGroup（NioEventGroup()）
+2.通过便捷的启动服务类启动
+ServerBootstrap serverBootstrap = new ServerBootstrap();
+serverBootstrap.group(bossGroup, workerGroup).channel(NioServerSocketChannel.class).childHandler(new TestServerInitializer());
+通过initializer初始化按顺序添加handler
+3.在自定义handler中重写方法定义处理方式(事件回调方法)
