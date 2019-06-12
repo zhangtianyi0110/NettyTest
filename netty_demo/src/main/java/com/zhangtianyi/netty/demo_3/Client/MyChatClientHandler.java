@@ -1,4 +1,4 @@
-package com.zhangtianyi.netty.demo_3.note.Client;
+package com.zhangtianyi.netty.demo_3.Client;
 
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;

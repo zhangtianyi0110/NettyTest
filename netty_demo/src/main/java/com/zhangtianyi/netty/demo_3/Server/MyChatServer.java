@@ -1,4 +1,4 @@
-package com.zhangtianyi.netty.demo_3.note.Server;
+package com.zhangtianyi.netty.demo_3.Server;
 
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelFuture;

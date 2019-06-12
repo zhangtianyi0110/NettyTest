@@ -1,4 +1,4 @@
-package com.zhangtianyi.netty.demo_3.note.Client;
+package com.zhangtianyi.netty.demo_3.Client;
 
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.ChannelPipeline;
