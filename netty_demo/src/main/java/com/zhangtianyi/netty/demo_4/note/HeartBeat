@@ -1,0 +1,19 @@
+心跳检测
+基本流程跟netty-socket一致
+服务端：
+1.MyServer
+2.MyServerInitializer
+    添加IdleStateHandler处理器（空闲状态检测处理器）
+    添加MyServerHandler
+3.MyServerHandler
+    继承ChannelInboundHandlerAdapter适配器是SimpleChannelInboundHandler父类
+    重写userEventTriggered，此方法会在事件触发（调用此方法）后传给下一个处理器
+    在此方法中检测pipline中前一个IdleStateHandler的超时状态
+
+
+客户端：可以使用netty-socket多客户端的
+1.MyClient
+
+2.MyClientInitializer
+
+3.MyClientHandler

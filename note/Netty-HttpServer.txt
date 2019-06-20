@@ -1,5 +1,0 @@
-netty实现简单HTTPServer步,回传helloword步骤
-1.定义bossGroup和workerGroup（NioEventGroup()）
-2.通过便捷的启动服务类启动
-ServerBootstrap serverBootstrap = new ServerBootstrap();
-serverBootstrap.group(bossGroup, workerGroup).channel(NioServerSocketChannel.class).childHandler(new TestServerInitializer());

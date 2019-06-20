@@ -1,0 +1,7 @@
+服务端
+MyServerInitializer使用到处理器
+0.HttpServerCodec
+1.ChunkedWriteHandler
+2.HttpObjectAggregator
+3.WebSocketServerProtocolHandler
+4.TextWebSocketFrameHandler
