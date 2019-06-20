@@ -3,5 +3,15 @@ MyServerInitializer使用到处理器
 0.HttpServerCodec
 1.ChunkedWriteHandler
 2.HttpObjectAggregator
-3.WebSocketServerProtocolHandler
+3.WebSocketServerProtocolHandler//配置uri
 4.TextWebSocketFrameHandler
+
+js
+window.WebSocket
+var socket = new WebSocket(url)
+
+触发事件
+socket.onopen//连接建立
+socket.onmessage//回传消息
+socket.onclose//连接关闭
+socket.onerror//连接错误

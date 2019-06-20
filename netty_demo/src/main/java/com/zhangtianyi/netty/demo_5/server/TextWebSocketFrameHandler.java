@@ -20,6 +20,11 @@ public class TextWebSocketFrameHandler extends SimpleChannelInboundHandler<TextW
     }
 
     @Override
+    public void handlerRemoved(ChannelHandlerContext ctx) throws Exception {
+        System.out.println("handlerRemoved:"+ctx.channel().id().asShortText());
+    }
+
+    @Override
     public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
         cause.printStackTrace();
         ctx.close();

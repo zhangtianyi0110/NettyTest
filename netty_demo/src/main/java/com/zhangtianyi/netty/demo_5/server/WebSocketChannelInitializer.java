@@ -21,8 +21,12 @@ public class WebSocketChannelInitializer extends ChannelInitializer<SocketChanne
          */
         pipeline.addLast(new HttpObjectAggregator(8192));
 
-        //处理websocket,处理websocket所有繁重的工作，例如握手，心跳，文本，二进制会传给下一个handler
-        pipeline.addLast(new WebSocketServerProtocolHandler("ws"));
+        /**
+         *   处理websocket,处理websocket所有繁重的工作，例如握手，心跳，文本，二进制会传给下一个handler,/ws是url
+         *   数据以frame(帧)形式
+         */
+
+        pipeline.addLast(new WebSocketServerProtocolHandler("/ws"));
 
 
         pipeline.addLast(new TextWebSocketFrameHandler());
