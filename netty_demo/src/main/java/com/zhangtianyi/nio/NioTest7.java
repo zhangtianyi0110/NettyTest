@@ -19,6 +19,6 @@ public class NioTest7 {
         ByteBuffer readonlyBuffer = buffer.asReadOnlyBuffer();
         System.out.println(readonlyBuffer.getClass());
         readonlyBuffer.position(0);
-        System.out.println(readonlyBuffer.get());//会抛出异常
+//        System.out.println(readonlyBuffer.put(byte(2)));//会抛出异常
     }
 }
