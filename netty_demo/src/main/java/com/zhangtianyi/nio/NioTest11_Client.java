@@ -6,7 +6,7 @@ import java.nio.channels.SocketChannel;
 import java.nio.charset.Charset;
 /** 
  * @ClassName: NioTest11_Client
- * @Description: Scattering和Gathering
+ * @Description: Scattering和Gathering的测试客户端
  * @author zhangtainyi
  * @date 2019/6/24 18:14
  *
