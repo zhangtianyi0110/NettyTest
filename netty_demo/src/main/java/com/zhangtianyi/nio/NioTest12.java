@@ -28,15 +28,15 @@ public class NioTest12 {
             ServerSocketChannel serverSocketChannel = ServerSocketChannel.open();
             serverSocketChannel.configureBlocking(false);//调整阻塞模式，false不阻塞
             InetSocketAddress address = new InetSocketAddress(ports[i]);
-            serverSocketChannel.bind(address);
-
+            serverSocketChannel.bind(address);//监听端口
+            //注册accept事件到selector
             serverSocketChannel.register(selector, SelectionKey.OP_ACCEPT);
 
             System.out.println("监听端口：" + ports[i]);
         }
         while (true){
-            int numbers = selector.select();
-            System.out.println("number:" + numbers);
+            int numbers = selector.select();//获取所有selectKey键，阻塞
+            System.out.println("number:" + numbers);//五个serverSocketChannel都注册了Accept，只有一个键
 
             Set<SelectionKey> selectionKeys = selector.selectedKeys();
             System.out.println("selectionKeys:" + selectionKeys);
